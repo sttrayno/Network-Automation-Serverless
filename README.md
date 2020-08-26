@@ -199,7 +199,7 @@ Once you've created your gateway, it's time to add some resources and methods. F
 
 ## Invoking our API
 
-Now all thats left to do is to test out our API and invoke our function. To do this
+Now all thats left to do is to test out our API and invoke our function. To do this select the method "POST" of the resource we created earlier. It should take you to the "POST - Method Execution" screen which shows a workflow of what will happen when the API runs.
 
 As you can see below theres an example JSON body that our function is expecting, edit this with your own credentials and details and paste this into the "Request Body" section of the form (ensuring a properly formatted JSON body is crucial for this to work correctly. When you reach the bottom of the form press the "Test" button and wait. The function may take up to 30 seconds to complete, as it runs you can refresh the Meraki dashboard to see the actions being carried out as the function runs, you should see the network being created and devices being updated as it goes. Once it's complete the response will show ""Success, network has been created!"" as the animated diagram shows below.
 
