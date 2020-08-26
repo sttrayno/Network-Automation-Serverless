@@ -26,23 +26,23 @@ First you can see here our code is split into functions
 
 The variable events which is passed into this function will include the parameters from the HTTP body that is passed from our API gateway, the main function parses this and then calls each of the functions below in order to complete our desired workflow
 
-The main() function is called by our Lambda function at runtime when an event triggers our code.
+The main() function is called by our Lambda function at runtime when an event triggers our code. Upon sucessful run this will return a HTTP code 200 with the message "Success, network has been created!"
 
 ##### create_Network(event)
 
-Calls the API in Meraki which creates a new network.
+The first function which is called from main. Calls the API in Meraki which creates a new network in the Meraki dashboard
 
-Also returns the variable networkID which is required by later functions
+Also returns the variable networkID which is required by later functions.
 
 ##### claimDevices(event, networkID)
 
-Calls the API in Meraki to claim our devices to our newly created network, will look round the devices dictionary from our HTTP body
+Calls the API in Meraki to claim our devices to our newly created network, will look round the devices dictionary from our HTTP body and add all the devices that are present with valid serial numbers.
 
 ##### updateDevices(event)
 
 Updates the newly claimed devices with specific information including device location and name. 
 
-Device name is a concatenation on network name and device type.
+Device name is a concatenation on network name and device type which is carried out by this function.
 
 ##### bindTemplate(event, networkID)
 
@@ -68,10 +68,8 @@ def main(event, context):
 
     return {
         'statusCode': 200,
-        'body': json.dumps('Sucess, network has been created!')
+        'body': json.dumps('Success, network has been created!')
     }
-
-
 
 def create_network(event):
 
@@ -93,7 +91,6 @@ def create_network(event):
 
     return networkID
 
-
 def claimDevices(event, networkID):
 
 
@@ -112,7 +109,6 @@ def claimDevices(event, networkID):
 
         response = requests.request("POST", url, headers=headers, data = payload)
 
-
 def updateDevices(event):
 
 
@@ -127,7 +123,6 @@ def updateDevices(event):
 
         url = "https://api-mp.meraki.com/api/v1/devices/" + serial
 
-
         payload = "{\n    \"name\": \"" + deviceName + "\",\n    \"address\": \"" + address +"\",\n    \"moveMapMarker\": \"True\"\n}"
         print(payload)
         headers = {
@@ -137,10 +132,7 @@ def updateDevices(event):
 
         response = requests.request("PUT", url, headers=headers, data = payload)
 
-
-
 def bindTemplate (event,networkID):
-
 
     url = "https://api-mp.meraki.com/api/v1/networks/"+ networkID +"/bind"
 
@@ -155,25 +147,29 @@ def bindTemplate (event,networkID):
 
 ## Packaging up our code
 
-One of the first idiosyncracies of using Lambda is how we package up our code, especially if you have library dependancies in Python
+One of the first idiosyncracies of using Lambda is how we package up our code, especially if you have library dependancies in Python which you need to package up with your code, in this example we have to do this for the requests module which isn't included in the Lambda python interpreter and has to be uploaded as a package.
 
-Hopefully you should have
+To begin, on your local machine navigate to the same directory as your main.py file, if you have cloned this repo that is under the directory 'code'. To get our libraries in a new, project-local package directory use the pip command with the --target option.
 
 ```bash
 pip install --target ./package requests
 cd package
 ```
 
+Now thats done, create a ZIP archive of the dependencies.
+
 ```bash 
 zip -r9 ${OLDPWD}/function.zip .
 ```
+
+And add your function code to the archive also
 
 ```
 cd $OLDPWD
 zip -g function.zip lambda_function.py
 ```
 
-Now you have your function.zip archive, it's time to upload this to your Lambda function
+Now you have your function.zip archive, it's time to upload this to your Lambda function. But first lets create a Lambda function
 
 ## Building an API gateway
 
