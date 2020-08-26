@@ -12,7 +12,7 @@ As an example I've used the workflow of creating a branch in Meraki. However thi
 
 Create network API --> Claim devices to network --> Update devices with names/location --> Bind a template to the network
 
-Having such a concept of this would allow you to build a series of workflows, potentially using different tools, paltforms or languages but have a consistent way of invoking these workflows through calling an API gateway for example.
+Having such a concept of this would allow you to build a series of workflows, potentially using different tools, platforms or languages but have a consistent way of invoking these workflows through calling an API gateway for example.
 
 So first off you'll need your code, when building you're code especially if you're passing data to your function in there's a few characterisics of building for Lambda that we need to adapt to but I'll try cover most of it in this guide so that you can adapt this to you're own environment and usecase. 
 
