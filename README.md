@@ -8,7 +8,7 @@ However after much experimentation this ended up not being feasible as to packag
 
 As an example I've used the workflow of creating a branch in Meraki. However this could be pretty much anything you want to automate, if you can write it in a language such as Python, Go or anything else that Lambda supports and aslong as you have access to the API or device you want to automate from your AWS region you should be able to run it from Lambda. 
 
-#### Create branch workflow
+## Create branch workflow
 
 Create network API --> Claim devices to network --> Update devices with names/location --> Bind a template to the network
 
