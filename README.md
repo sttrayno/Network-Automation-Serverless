@@ -8,9 +8,9 @@ My initial thoughts for this was as I have been using a lot of tools such as Ter
 
 Create network API --> Claim devices to network --> Update devices with names/location --> Bind a template to the network
 
-Having such a concept of this would allow you to build a series of workflows, potentially using different tools or languages but have a consistent way of invoking these workflows through calling an API gateway for example.
+Having such a concept of this would allow you to build a series of workflows, potentially using different tools, paltforms or languages but have a consistent way of invoking these workflows through calling an API gateway for example.
 
-So first off you'll need your code, when building you're code especially if you're passing parameters in there's a few characterisics of building for Lambda that we need to adapt to but I'll try cover most of it in this guide so that you can adapt this to you're own environment and usecase.
+So first off you'll need your code, when building you're code especially if you're passing data to your function in there's a few characterisics of building for Lambda that we need to adapt to but I'll try cover most of it in this guide so that you can adapt this to you're own environment and usecase. 
 
 ```python
 import requests
@@ -118,7 +118,32 @@ def bindTemplate (event,networkID):
 
 ## Packaging up our code
 
+One of the first idiosyncracies of 
+
 ## Building an API gateway
+
+Now we have our code 
 
 ## Invoking our API
 
+```json
+{
+  "auth": "your-auth-key-here",
+  "orgID": "123456",
+  "timezone": "Europe/London",
+  "networkName": "testNetwork",
+  "templateID": "L_123456789",
+  "devices": {
+    "Device-1": {
+      "serial": "XXXX-XXXX-XXXX",
+      "address": "310 St Vincent St, Glasgow G2 5RG",
+      "type": "MX68"
+    },
+    "Device-2": {
+      "serial": "XXX-XXX-XXXX",
+      "address": "310 St Vincent St, Glasgow G2 5RG",
+      "type": "MR33"
+    }
+  }
+}
+```
