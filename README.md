@@ -191,7 +191,7 @@ As you get more advanced, you can add extra layers of authentication and additio
 
 First 
 
-![](.images/create-gateway.gif)
+![](./images/create-gateway.gif)
 
 ## Invoking our API
 
