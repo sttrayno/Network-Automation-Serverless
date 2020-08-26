@@ -2,13 +2,15 @@
 
 I've recently been studying for the AWS Associate Architect certification when I came across the concept of Lambda functions, which are known as Serverless. Serverless gives you and envrionment. You can set the triggers to p
 
-My initial thought for this was as I have been using a lot of tools such as Terraform and Anisble recently could I stick these behind a Lambda function and call on them in a consistent way such as an API gateway, however after much experimentation this ended up not being feasible as to package up the function with the required dependancies made the packages too large for Lambda to be able to support. So until I'm able to I decided to start off with a more simpilier example, build a workflow in Python
+My initial thought for this was as I have been using a lot of tools such as Terraform and Anisble recently could I stick these behind a Lambda function and call on them in a consistent way such as an API gateway, however after much experimentation this ended up not being feasible as to package up the function with the required dependancies made the packages too large for Lambda to be able to support. So as this wasn't I decided to start off with a more simpilier example, build a workflow in Python. As an example I've used the workflow of creating a branch in Meraki.
 
-Create branch workflow
+#### Create branch workflow
 
-So first off you'll need your code, 
+Create network API --> Claim devices to network --> Update devices with names/location --> Bind a template to the network
 
-When building you're code especially if you're passing parameters in there's a few characterisics of building for Lambda that we need to adapt to but I'll try cover most of it in this guide so that you can adapt this to you're own environment and usecase.
+Having such a concept of this would allow you to build a series of workflows, potentially using different tools or languages but have a consistent way of invoking these workflows through calling an API gateway for example.
+
+So first off you'll need your code, when building you're code especially if you're passing parameters in there's a few characterisics of building for Lambda that we need to adapt to but I'll try cover most of it in this guide so that you can adapt this to you're own environment and usecase.
 
 ```python
 import requests
