@@ -171,6 +171,13 @@ zip -g function.zip lambda_function.py
 
 Now you have your function.zip archive, it's time to upload this to your Lambda function. But first lets create a Lambda function
 
+![](./images/lambda-create.gif)
+
+Now that the function has been created, upload your newly created function.zip archive which hosts your code and packages
+
+![](./images/zip-upload.gif)
+
+
 ## Building an API gateway
 
 Now we have our code 
