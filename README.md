@@ -8,11 +8,13 @@ However after much experimentation this ended up not being feasible as to packag
 
 As an example I've used the workflow of creating a branch in Meraki. However this could be pretty much anything you want to automate, if you can write it in a language such as Python, Go or anything else that Lambda supports and aslong as you have access to the API or device you want to automate from your AWS region you should be able to run it from Lambda. 
 
-## Create branch workflow
-
 Create network API --> Claim devices to network --> Update devices with names/location --> Bind a template to the network
 
-Having such a concept of this would allow you to build a series of workflows, potentially using different tools, platforms or languages but have a consistent way of invoking these workflows through calling an API gateway for example.
+## Create your workflow in code
+
+Having such a concept of would allow you to build a series of workflows, potentially using different tools, platforms or languages but have a consistent way of invoking these workflows through calling an API gateway for example.
+
+In this example we'll be focusing on Python as it's today the most popular language for network automation
 
 So first off you'll need your code, when building you're code especially if you're passing data to your function in there's a few characterisics of building for Lambda that we need to adapt to but I'll try cover most of it in this guide so that you can adapt this to you're own environment and usecase. 
 
