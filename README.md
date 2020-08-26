@@ -122,7 +122,25 @@ def bindTemplate (event,networkID):
 
 ## Packaging up our code
 
-One of the first idiosyncracies of 
+One of the first idiosyncracies of using Lambda is how we package up our code, especially if you have library dependancies in Python
+
+Hopefully you should have
+
+```bash
+pip install --target ./package requests
+cd package
+```
+
+```bash 
+zip -r9 ${OLDPWD}/function.zip .
+```
+
+```
+cd $OLDPWD
+zip -g function.zip lambda_function.py
+```
+
+Now you have your function.zip archive, it's time to upload this to your Lambda function
 
 ## Building an API gateway
 
