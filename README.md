@@ -169,6 +169,8 @@ cd $OLDPWD
 zip -g function.zip main.py
 ```
 
+![](./images/create-zip.gif)
+
 Now you have your function.zip archive, it's time to upload this to your Lambda function. But first lets create a Lambda function. To do this search for the "Lambda" service from your management console on AWS and go to the function section, from there you should see the "Create function" option, select this and use the create from scratch wizard to create your function (ensure the runtime is set to Python 3.8).
 
 ![](./images/lambda-create.gif)
