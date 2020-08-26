@@ -185,7 +185,7 @@ Now our code is uploaded to the function we have to edit some of the settings fo
 
 ## Building an API gateway
 
-Now we have our function ready we need a way to invoke the function from an event. In this example we're going to do this through invoking an API.
+Now we have our function ready we need a way to invoke the function from an event. In this example we're going to do this through invoking an API that we're going to create from AWS's API gateway service
 
 As you get more advanced, you can add extra layers of authentication and additional features to the API. But for this example we're going to keep it simple.
 
@@ -193,11 +193,15 @@ First we need to create our API gateway, to do this search for the "API Gateway"
 
 ![](./images/create-gateway.gif)
 
+Once you've created your gateway, it's time to add some resources and methods. From the resources section, select actions and click on create resource. This will be the REST endpoint that you're API will serve. Once you've gave it a name then select create method and select "POST"
+
 ![](./images/create-method.gif)
 
 ## Invoking our API
 
-Now all thats left to do is to test out our API. 
+Now all thats left to do is to test out our API and invoke our function. To do this
+
+As you can see below theres an example JSON body that our function is expecting, edit this with your own credentials and details and paste this into the "Request Body" section of the form (ensuring a properly formatted JSON body is crucial for this to work correctly. When you reach the bottom of the form press the "Test" button and wait. The function may take up to 30 seconds to complete, as it runs you can refresh the Meraki dashboard to see the actions being carried out as the function runs, you should see the network being created and devices being updated as it goes. Once it's complete the response will show ""Success, network has been created!"" as the animated diagram shows below.
 
 ![](./images/invoke-api.gif)
 
@@ -222,5 +226,3 @@ Now all thats left to do is to test out our API.
   }
 }
 ```
-
-Fromt his point you can go on
