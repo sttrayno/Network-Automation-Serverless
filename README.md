@@ -166,7 +166,7 @@ And add your function code to the archive also
 
 ```
 cd $OLDPWD
-zip -g function.zip lambda_function.py
+zip -g function.zip main.py
 ```
 
 Now you have your function.zip archive, it's time to upload this to your Lambda function. But first lets create a Lambda function
@@ -177,6 +177,9 @@ Now that the function has been created, upload your newly created function.zip a
 
 ![](./images/zip-upload.gif)
 
+Now our code is uploaded to the function we have to edit some of the settings for when the code is run, scroll down the page to "Basic settings" and press edit. First set the timeout to be around a minute, it should take around 20-30 seconds for our function to run, therefore the 3 second timeout has to be increaed or our function will never work. Also change the handler to "main.main" this means when the function runs it will look in the main.py file and run the main function. Remember this when you design your code as you can only invoke a single function in a lambda event.
+
+![](./images/change-handler.gif)
 
 ## Building an API gateway
 
