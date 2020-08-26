@@ -185,7 +185,13 @@ Now our code is uploaded to the function we have to edit some of the settings fo
 
 ## Building an API gateway
 
-Now we have our function ready we need a way to invoke the function from an event.
+Now we have our function ready we need a way to invoke the function from an event. In this example we're going to do this through invoking an API.
+
+As you get more advanced, you can add extra layers of authentication and additional features to the API. But for this example we're going to keep it simple.
+
+First 
+
+![](.images/create-gateway.gif)
 
 ## Invoking our API
 
