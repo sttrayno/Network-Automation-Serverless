@@ -169,11 +169,11 @@ cd $OLDPWD
 zip -g function.zip main.py
 ```
 
-Now you have your function.zip archive, it's time to upload this to your Lambda function. But first lets create a Lambda function
+Now you have your function.zip archive, it's time to upload this to your Lambda function. But first lets create a Lambda function. To do this search for the "Lambda" service from your management console on AWS and go to the function section, from there you should see the "Create function" option, select this and use the create from scratch wizard to create your function (ensure the runtime is set to Python 3.8).
 
 ![](./images/lambda-create.gif)
 
-Now that the function has been created, upload your newly created function.zip archive which hosts your code and packages
+Now that the function has been created, upload your newly created function.zip archive which hosts your code and packages, you can find this from the actions button under the "Function code" section,
 
 ![](./images/zip-upload.gif)
 
@@ -183,7 +183,7 @@ Now our code is uploaded to the function we have to edit some of the settings fo
 
 ## Building an API gateway
 
-Now we have our code 
+Now we have our function ready we need a way to invoke the function from an event.
 
 ## Invoking our API
 
