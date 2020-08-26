@@ -1,8 +1,8 @@
 # Using Serverless computing and Lambda for Network Automation
 
-I've recently been studying for the AWS Associate Architect certification when I came across the concept of Lambda functions, which are known as Serverless. Serverless gives you and envrionment. You can set the triggers to p
+I've recently been studying for the AWS Associate Architect certification when I came across the concept of Serverless functions, which are known as Lambda functions in AWS. Serverless gives you and envrionment in which you can upload you code (from pretty much any language of your choosing) once the code is setup as a Lambda function you can then trigger it to run with events. Events could be something as simple as a file being uploaded into a datastore or an API call to an API gateway which is set up to redirect to the Lambda. When it comes to automation, having an environment like this that allows us to build, store and trigger our code from can be quite a useful tool.
 
-My initial thought for this was as I have been using a lot of tools such as Terraform and Anisble recently could I stick these behind a Lambda function and call on them in a consistent way such as an API gateway, however after much experimentation this ended up not being feasible as to package up the function with the required dependancies made the packages too large for Lambda to be able to support. So as this wasn't I decided to start off with a more simpilier example, build a workflow in Python. As an example I've used the workflow of creating a branch in Meraki.
+My initial thoughtsfor this was as I have been using a lot of tools such as Terraform and Anisble recently could I stick these behind a Lambda function and call on them in a consistent way such as an API gateway, however after much experimentation this ended up not being feasible as to package up the function with the required dependancies made the packages too large for Lambda to be able to support. So as this wasn't I decided to start off with a more simpilier example, build a workflow in Python. As an example I've used the workflow of creating a branch in Meraki.
 
 #### Create branch workflow
 
