@@ -193,11 +193,13 @@ First we need to create our API gateway, to do this search for the "API Gateway"
 
 ![](./images/create-gateway.gif)
 
-
+![](./images/create-method.gif)
 
 ## Invoking our API
 
 Now all thats left to do is to test out our API. 
+
+![](./images/invoke-api.gif)
 
 ```json
 {
