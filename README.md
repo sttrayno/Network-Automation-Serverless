@@ -112,5 +112,11 @@ def bindTemplate (event,networkID):
     }
 
     response = requests.request("POST", url, headers=headers, data = payload)
+```
 
+## Packaging up our code
+
+## Building an API gateway
+
+## Invoking our API
 
