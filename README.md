@@ -4,7 +4,7 @@ I've recently been studying for the AWS Associate Architect certification when I
 
 My initial thoughts for this was as I have been using a lot of tools such as Terraform and Anisble recently could I put the workflows I build these tools behind Lambda functions and call on them in a consistent way such as an API gateway. Therefore rather than focus on the tools, automation teams can automate the tasks they need to but provide a consistent way to themselves and other teams to automate their services. Imagine a scenario such as below, where an automation team that uses multiple tools such as Ansible, Terraform, and their own custom scripts can host these as indivdual Lambda functions and expose them as a simple API.
 
-![](./images/API-gateway.png)
+![](./images/API-Gateway.png)
 
 However after much experimentation this ended up not being feasible as to package up the function with the required dependancies made the packages too large for Lambda to be able to support. So as this wasn't possible I decided to start off with a simpler example, build a workflow in Python using the API's of the individual platform to build a basic task.
 
