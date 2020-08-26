@@ -1,4 +1,4 @@
-# Network-Automation-Serverless
+# Using Serverless computing and Lambda for Network Automation
 
 I've recently been studying for the AWS Architect certifications when I came across the concept of 
 
