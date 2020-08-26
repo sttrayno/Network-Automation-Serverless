@@ -226,3 +226,11 @@ As you can see below theres an example JSON body that our function is expecting,
   }
 }
 ```
+
+Now all that's left to do is deploy your API. Using the "deploy API" option from the actions drop down. Create a new stage, call it whatever you want here. 
+
+![](./images/deploy-api.gif)
+
+Finally, now the API has been published, it can be accessed using tools such as Postman.
+
+![](./images/postman.gif)
