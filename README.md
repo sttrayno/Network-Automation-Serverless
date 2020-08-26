@@ -145,7 +145,7 @@ def bindTemplate (event,networkID):
     response = requests.request("POST", url, headers=headers, data = payload)
 ```
 
-## Packaging up our code
+## Packaging up our code and creating a Lambda function
 
 One of the first idiosyncracies of using Lambda is how we package up our code, especially if you have library dependancies in Python which you need to package up with your code, in this example we have to do this for the requests module which isn't included in the Lambda python interpreter and has to be uploaded as a package.
 
