@@ -189,11 +189,15 @@ Now we have our function ready we need a way to invoke the function from an even
 
 As you get more advanced, you can add extra layers of authentication and additional features to the API. But for this example we're going to keep it simple.
 
-First 
+First we need to create our API gateway, to do this search for the "API Gateway" service from your management console on AWS and go to the function section, from there you should see the "Create API" option, select this and use the create from scratch wizard to create your function (ensure the runtime is set to Python 3.8).
 
 ![](./images/create-gateway.gif)
 
+
+
 ## Invoking our API
+
+Now all thats left to do is to test out our API. 
 
 ```json
 {
@@ -216,3 +220,5 @@ First
   }
 }
 ```
+
+Fromt his point you can go on
