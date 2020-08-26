@@ -1,8 +1,8 @@
 # Using Serverless computing and Lambda for Network Automation
 
-I've recently been studying for the AWS Associate Architect certification when I came across the concept of Serverless functions, which are known as Lambda functions in AWS. Serverless gives you and environment in which you can upload you code (from pretty much any language of your choosing) once the code is setup as a Lambda function you can then trigger it to run with events. Events could be something as simple as a file being uploaded into a datastore or an API call to an API gateway which is set up to redirect to the Lambda. When it comes to automation, having an environment like this that allows us to build, store and trigger our code from can be quite a useful tool. In this guide we'll explore some potential usecases of this technology and walkthrough a practical example.
+I've recently been studying for the AWS Associate Architect certification when I came across the concept of Serverless functions, which are known as Lambda functions in AWS. Serverless gives you and environment in which you can upload you code (from pretty much any language of your choosing) once the code is setup as a Lambda function you can then trigger it to run with events. Events could be something as simple as a file being uploaded into a datastore or an HTTP/REST call to an API gateway which is set up to redirect to the Lambda. When it comes to automation, having an environment like this that allows us to build, store and trigger our code from can be quite a useful tool. In this guide we'll explore some potential usecases of this technology and walkthrough a practical example. When it comes to network automation we often need a compute environment in which to host our scripts and workflows, serverless negates the need for that to be a dedicated compute enivornment aslong as our code is built in the right way. The obvious benefit to this is cost, instead of needing to pay for and maintain a dedicated server billing is carried out per 'event' which leads to considerable opex savings.
 
-My initial thoughts for this was as I have been using a lot of tools such as Terraform and Anisble recently could I put the workflows I build these tools behind Lambda functions and call on them in a consistent way such as an API gateway. Therefore rather than focus on the tools, automation teams can automate the tasks they need to but provide a consistent way to themselves and other teams to automate their services. Imagine a scenario such as below, where an automation team that uses multiple tools such as Ansible, Terraform, and their own custom scripts can host these as indivdual Lambda functions and expose them as a simple API.
+My initial thoughts for this was as I have been using a lot of tools such as Terraform and Anisble recently could to put the workflows built with these tools behind Lambda functions and call on them in a consistent way such as an API gateway. Therefore rather than focus on the tools, automation teams can automate the tasks they need to but provide a consistent way to themselves and other teams to automate their services. Imagine a scenario such as below, where an automation team that uses multiple tools such as Ansible, Terraform, and their own custom scripts can host these as indivdual Lambda functions and expose them as a simple API.
 
 ![](./images/API-Gateway.png)
 
@@ -16,11 +16,11 @@ As an example I've used the workflow of creating a branch in Meraki. However thi
 
 Having such a concept of would allow you to build a series of workflows, potentially using different tools, platforms or languages but have a consistent way of invoking these workflows through calling an API gateway for example.
 
-In this example we'll be focusing on Python as it's today the most popular language for network automation
+In this example we'll be focusing on Python as it's today by far the most popular language for network automation, however you have many options for runtimes to build your functions on including Go, NodeJS, Java, Ruby and .NET.
 
 So first off you'll need your code, when building you're code especially if you're passing data to your function in there's a few characterisics of building for Lambda that we need to adapt to but I'll try cover most of it in this guide so that you can adapt this to you're own environment and usecase. 
 
-First you can see here our code is split into functions
+First you can see here our code is split into functions:
 
 ##### main(events, context)
 
@@ -147,7 +147,7 @@ def bindTemplate (event,networkID):
 
 ## Packaging up our code and creating a Lambda function
 
-One of the first idiosyncracies of using Lambda is how we package up our code, especially if you have library dependancies in Python which you need to package up with your code, in this example we have to do this for the requests module which isn't included in the Lambda python interpreter and has to be uploaded as a package.
+One of the first idiosyncracies of using Lambda is how we package up and upload our code to the service, especially if you have library dependancies in Python which you need to package up with your code, in this example we have to do this for the requests module which isn't included in the Lambda python interpreter and has to be uploaded as a package.
 
 To begin, on your local machine navigate to the same directory as your main.py file, if you have cloned this repo that is under the directory 'code'. To get our libraries in a new, project-local package directory use the pip command with the --target option.
 
