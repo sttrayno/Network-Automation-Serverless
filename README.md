@@ -1,20 +1,22 @@
 # Using Serverless computing and Lambda for Network Automation
 
-I've recently been studying for the AWS Associate Architect certification when I came across the concept of Serverless functions, which are known as Lambda functions in AWS. Serverless gives you and environment in which you can upload you code (from pretty much any language of your choosing) once the code is setup as a Lambda function you can then trigger it to run with events. Events could be something as simple as a file being uploaded into a datastore or an HTTP/REST call to an API gateway which is set up to redirect to the Lambda. When it comes to automation, having an environment like this that allows us to build, store and trigger our code from can be quite a useful tool. In this guide we'll explore some potential usecases of this technology and walkthrough a practical example. When it comes to network automation we often need a compute environment in which to host our scripts and workflows, serverless negates the need for that to be a dedicated compute enivornment aslong as our code is built in the right way. The obvious benefit to this is cost, instead of needing to pay for and maintain a dedicated server billing is carried out per 'event' which leads to considerable opex savings.
+I've recently been studying for the AWS Associate Architect certification when I came across the concept of Serverless functions, which are known as Lambda functions in AWS. Serverless gives you and environment in which you can upload you code (from pretty much any language of your choosing) once the code is setup as a Lambda function you can then trigger it to run with events. Events could be something as simple as a file being uploaded into a datastore or an HTTP/REST call to an API gateway which is set up to redirect to the Lambda. When it comes to automation, having an environment like this that allows us to build, store and trigger our code from can be quite a useful tool. No longer do we have to set up a raspberry pi or run around trying to find a server to install Linux on, we simply write our function and set a trigger.
 
-My initial thoughts for this was as I have been using a lot of tools such as Terraform and Anisble recently could to put the workflows built with these tools behind Lambda functions and call on them in a consistent way such as an API gateway. Therefore rather than focus on the tools, automation teams can automate the tasks they need to but provide a consistent way to themselves and other teams to automate their services. Imagine a scenario such as below, where an automation team that uses multiple tools such as Ansible, Terraform, and their own custom scripts can host these as indivdual Lambda functions and expose them as a simple API.
+In this guide we'll explore some potential usecases of this technology and walkthrough a practical example. When it comes to network automation we often need a compute environment in which to host our scripts and workflows, serverless negates the need for that to be a dedicated compute enivornment aslong as our code is built in the right way. The obvious benefit to this is cost, instead of needing to pay for and maintain a dedicated server billing is carried out per 'event' which leads to considerable opex savings.
+
+My initial thoughts for this was as I have been using a lot of tools such as Terraform and Anisble recently was to put the workflows built with these tools behind Lambda functions and call on them in a consistent way such as an API gateway. Therefore rather than focus on the tools, automation teams can automate the tasks they need to but provide a consistent way to themselves and other teams to automate their services and provide a service. Imagine a scenario such as below, where an automation team that uses multiple tools such as Ansible, Terraform, and their own custom scripts can host these as indivdual Lambda functions and expose them as a simple API.
 
 ![](./images/API-Gateway.png)
 
-However after much experimentation this ended up not being feasible as to package up the function with the required dependancies made the packages too large for Lambda to be able to support. So as this wasn't possible I decided to start off with a simpler example, build a workflow in Python using the API's of the individual platform to build a basic task.
+However after much experimentation this ended up not being feasible as to package up the function with the required dependancies made the packages too large for Lambda to be able to support. So as this wasn't possible I decided to start off with a simpler example, build a workflow in Python using the API's of the individual platform to build a basic task. 
 
 As an example I've used the workflow of creating a branch in Meraki. However this could be pretty much anything you want to automate, if you can write it in a language such as Python, Go or anything else that Lambda supports and aslong as you have access to the API or device you want to automate from your AWS region you should be able to run it from Lambda. 
 
 ![](./images/workflow.png)
 
-## Create your workflow in code
-
 Having such a concept of would allow you to build a series of workflows, potentially using different tools, platforms or languages but have a consistent way of invoking these workflows through calling an API gateway for example.
+
+## Create your workflow in code
 
 In this example we'll be focusing on Python as it's today by far the most popular language for network automation, however you have many options for runtimes to build your functions on including Go, NodeJS, Java, Ruby and .NET.
 
@@ -24,13 +26,19 @@ First you can see here our code is split into functions:
 
 ##### main(events, context)
 
-The variable events which is passed into this function will include the parameters from the HTTP body that is passed from our API gateway, the main function parses this and then calls each of the functions below in order to complete our desired workflow
+The variable events which is passed into this function will include the parameters from the HTTP body that is passed from our API gateway, the main function parses this and then calls each of the functions below in order to complete our desired workflow.
 
 The main() function is called by our Lambda function at runtime when an event triggers our code. Upon sucessful run this will return a HTTP code 200 with the message "Success, network has been created!"
 
+You will notice on this function we pass in two parameters, events and context.
+
+Events will pass user defined information to our function, for example it will pass in the parameters from our API call in the HTTP body from our API gateway. You can see this in the code from the dictionary element 'event['body']' which is passed into our function.
+
+Context provides information about how your Lambda has been triggered and other useful information, we'll leave Context to one side as we won't use it in this guide.
+
 ##### create_Network(event)
 
-The first function which is called from main. Calls the API in Meraki which creates a new network in the Meraki dashboard
+This is the first function which is called from main. Calls the API in Meraki which creates a new network in the Meraki dashboard
 
 Also returns the variable networkID which is required by later functions.
 
@@ -231,6 +239,8 @@ Now all that's left to do is deploy your API. Using the "deploy API" option from
 
 ![](./images/deploy-api.gif)
 
-Finally, now the API has been published, it can be accessed using tools such as Postman.
+Finally, now the API has been published, it can be accessed using tools such as Postman as can be seen from the graphic below.
 
 ![](./images/postman.gif)
+
+Congratulations, you've just set up your first Lambda function and built your first API gateway! Great work!
